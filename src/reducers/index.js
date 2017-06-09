@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux-immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
+import { fromJS } from 'immutable';
 
 import globalReducer from '../containers/App/reducer';
+import loginReducer from '../containers/Login/reducer';
 
 
-const routeInitialState = {
+const routeInitialState = fromJS({
   locationBeforeTransitions: null,
-};
+});
 
 function routeReducer(state = routeInitialState, action) {
   switch (action.type) {
@@ -20,12 +22,22 @@ function routeReducer(state = routeInitialState, action) {
   }
 }
 
-export default function createReducer(asyncReducers) {
-  return combineReducers({
+const reducers = combineReducers(
+  {
     route: routeReducer,
     global: globalReducer,
-    ...asyncReducers
-  });
+    loginReducer
+  }
+);
+
+export default reducers;
+
+// export default function createReducer(asyncReducers) {
+//   return combineReducers({
+//     route: routeReducer,
+//     global: globalReducer,
+//     ...asyncReducers
+//   });
 // }
 //
 // function createReducer(){

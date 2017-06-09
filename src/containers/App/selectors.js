@@ -4,9 +4,9 @@
 
 import { createSelector } from 'reselect'
 
-const getAppState = (state, props) => state.appState;
+const getAppState = (state, props) => state.get('global');
 
 export const makeGetAppState = () => createSelector(
   getAppState,
-  (appState) => ({ start })
+  (appState) => appState.get('start')
 );
